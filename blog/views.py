@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Blog, Mensagem
 
 def index(request):
@@ -15,11 +15,13 @@ def post(request, post_id):
     }
     return render(request, "post.html", context)
 
+
 def sobre(request):
     context = {
         "blog": Blog.objects.first()
     }
     return render(request, "sobre.html", context)
+
 
 def contato(request):
     context = {
@@ -53,6 +55,7 @@ def contato(request):
     else:
         return render(request, "contato.html", context)
 
+
 def mensagens(request):
     context = {
         "mensagens": Mensagem.objects.all(),
@@ -60,3 +63,47 @@ def mensagens(request):
     }
     
     return render(request, "mensagens.html", context)
+
+def editar_mensagem(request, mensagem_id):
+    context = {
+        "blog": Blog.objects.first(),
+        "mensagem": get_object_or_404(Mensagem.objects.get(pk=mensagem_id)),
+    }
+    
+    if request.method == "POST":
+        context['erro'] = {} 
+        
+        if not request.POST['nome']:
+            context['erro']['nome'] = True
+        if not request.POST['email']:
+            context['erro']['email'] = True
+        if not request.POST['telefone']:
+            context['erro']['telefone'] = True
+        if not request.POST['cidade']:
+            context['erro']['cidade'] = True
+        if not request.POST['mensagem']:
+            context['erro']['mensagem'] = True
+        if context['erro']:
+            return render(request, "edit_contato.html", context)
+        
+        mensagem = context['mensagem']
+        mensagem.nome = request.POST['nome']
+        mensagem.email = request.POST['email']
+        mensagem.telefone = request.POST['telefone']
+        mensagem.cidade = request.POST['cidade']
+        mensagem.mensagem = request.POST['mensagem']
+        mensagem.save()
+        
+    return render(request, "editar_contato.html", context)
+
+def deletar_mensagem(request, mensagem_id):
+    context = {
+        "blog": Blog.objects.first(),
+        "mensagem": get_object_or_404[Mensagem.objects.get(pk=mensagem_id)]
+    }
+    
+    if request.method == "POST":
+        context['mensagem'].delete()
+        return redirect('mensagens'),
+    else:
+        return render(request, "deletar_contato.html", context)

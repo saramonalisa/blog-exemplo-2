@@ -9,7 +9,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Entre em contato</h1>
+                    <h1>Editar contato</h1>
                     <span class="subheading">Eu tenho todas as respostas</span>
                 </div>
             </div>
@@ -35,27 +35,27 @@
                     <form id="contactForm" method="POST">
                         {% csrf_token %}
                         <div class="form-floating">
-                            <input class="form-control {% if 'erro.nome' %}is-invalid{% endif %}" id="name" type="text" name="nome" placeholder="Digite seu nome..." data-sb-validations="required" />
+                            <input class="form-control {% if 'erro.nome' %}is-invalid{% endif %}" id="name" type="text" name="nome" placeholder="Digite seu nome..." value="{{ mensagem.nome }}" />
                             <label for="name">Nome</label>
                             <div class="invalid-feedback">Um nome é necessário.</div>
                         </div>
                         <div class="form-floating">
-                            <input class="form-control {% if 'erro.email' %}is-invalid{% endif %}" id="email" type="email" name="email" placeholder="Digite seu email..." data-sb-validations="required,email" />
+                            <input class="form-control {% if 'erro.email' %}is-invalid{% endif %}" id="email" type="email" name="email" placeholder="Digite seu email..." value="{{ mensagem.email }}" />
                             <label for="email">Email</label>
                             <div class="invalid-feedback">Um email é necessário.</div>
                         </div>
                         <div class="form-floating">
-                            <input class="form-control {% if 'erro.telefone' %}is-invalid{% endif %}" id="phone" type="tel" name="telefone" placeholder="Digite seu telefone..." data-sb-validations="required" />
+                            <input class="form-control {% if 'erro.telefone' %}is-invalid{% endif %}" id="phone" type="tel" name="telefone" placeholder="Digite seu telefone..." value="{{ mensagem.telefone }}" />
                             <label for="phone">Telefone</label>
                             <div class="invalid-feedback">Um número de telefone é necessário.</div>
                         </div>
                         <div class="form-floating">
-                            <textarea class="form-control {% if 'erro.cidade' %}is-invalid{% endif %}" id="cidade" name="cidade" placeholder="Digite sua cidade aqui..." style="height: 12rem" data-sb-validations="required"></textarea>
+                            <textarea class="form-control {% if 'erro.cidade' %}is-invalid{% endif %}" id="cidade" name="cidade" placeholder="Digite sua cidade aqui..." style="height: 12rem">{{ mensagem.cidade }}</textarea>
                             <label for="message">Cidade</label>
                             <div class="invalid-feedback">Uma cidade é necessária.</div>
                         </div>
                         <div class="form-floating">
-                            <textarea class="form-control {% if 'erro.mensagem' %}is-invalid{% endif %}" id="message" name="mensagem" placeholder="Digite sua mensagem aqui..." style="height: 12rem" data-sb-validations="required"></textarea>
+                            <textarea class="form-control {% if 'erro.mensagem' %}is-invalid{% endif %}" id="message" name="mensagem" placeholder="Digite sua mensagem aqui..." style="height: 12rem">{{ mensagem.mensagem }}</textarea>
                             <label for="message">Mensagem</label>
                             <div class="invalid-feedback">Uma messagem é necessária.</div>
                         </div>

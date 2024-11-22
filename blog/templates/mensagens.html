@@ -34,9 +34,11 @@
                     <a href="#!">{{ mensagem.email }}</a>
                     em {{ mensagem.cidade }}
                 </p>
+                <a href="{% url 'deletar_mensagem' mensagem.id %}"><button type="button" class="btn btn-danger">Deletar</button></a>
+                <a href="{% url 'editar_mensagem' mensagem.id %}"><button type="button" class="btn btn-primary">Editar</button></a>
             </div>
             <!-- Divider-->
-            <hr class="my-4" />
+            <hr class="my-4">
             {% endfor %}
             <!-- Pager-->
             <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Mensagens antigas →</a></div>
