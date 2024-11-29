@@ -34,32 +34,14 @@
                     <!-- to get an API token!-->
                     <form id="contactForm" method="POST">
                         {% csrf_token %}
+                        {% for field in form %}
                         <div class="form-floating">
-                            <input class="form-control {% if 'erro.nome' %}is-invalid{% endif %}" id="name" type="text" name="nome" placeholder="Digite seu nome..." data-sb-validations="required" />
-                            <label for="name">Nome</label>
-                            <div class="invalid-feedback">Um nome é necessário.</div>
+                            {{ field.errors }}
+                            {{ field }}
+                            {{ field.label_tag }}
                         </div>
-                        <div class="form-floating">
-                            <input class="form-control {% if 'erro.email' %}is-invalid{% endif %}" id="email" type="email" name="email" placeholder="Digite seu email..." data-sb-validations="required,email" />
-                            <label for="email">Email</label>
-                            <div class="invalid-feedback">Um email é necessário.</div>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control {% if 'erro.telefone' %}is-invalid{% endif %}" id="phone" type="tel" name="telefone" placeholder="Digite seu telefone..." data-sb-validations="required" />
-                            <label for="phone">Telefone</label>
-                            <div class="invalid-feedback">Um número de telefone é necessário.</div>
-                        </div>
-                        <div class="form-floating">
-                            <textarea class="form-control {% if 'erro.cidade' %}is-invalid{% endif %}" id="cidade" name="cidade" placeholder="Digite sua cidade aqui..." style="height: 12rem" data-sb-validations="required"></textarea>
-                            <label for="message">Cidade</label>
-                            <div class="invalid-feedback">Uma cidade é necessária.</div>
-                        </div>
-                        <div class="form-floating">
-                            <textarea class="form-control {% if 'erro.mensagem' %}is-invalid{% endif %}" id="message" name="mensagem" placeholder="Digite sua mensagem aqui..." style="height: 12rem" data-sb-validations="required"></textarea>
-                            <label for="message">Mensagem</label>
-                            <div class="invalid-feedback">Uma messagem é necessária.</div>
-                        </div>
-                        <br />
+                        {% endfor %}
+
                         <!-- Submit success message-->
                         <!---->
                         <!-- This is what your users will see when the form-->
@@ -77,6 +59,7 @@
                         <!-- This is what your users will see when there is-->
                         <!-- an error submitting the form-->
                         <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+        
                         <!-- Submit Button-->
                         <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Enviar</button>
                     </form>
