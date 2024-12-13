@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static crispy_forms_tags %}
 {% block title %}Contato{% endblock title %}
 
 {% block header %}
@@ -34,13 +34,7 @@
                     <!-- to get an API token!-->
                     <form id="contactForm" method="POST">
                         {% csrf_token %}
-                        {% for field in form %}
-                        <div class="form-floating">
-                            {{ field.errors }}
-                            {{ field }}
-                            {{ field.label_tag }}
-                        </div>
-                        {% endfor %}
+                        {{ form | crispy }}
 
                         <!-- Submit success message-->
                         <!---->
