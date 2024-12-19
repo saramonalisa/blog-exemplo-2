@@ -34,7 +34,9 @@ def contato(request):
         form = MensagemForm(request.POST)
         if form.is_valid():
             form.save()       
-        return redirect('mensagens')
+            return redirect('mensagens')
+        else:
+            context["form"] = form
     else:
         context['form'] = MensagemForm()
         return render(request, "contato.html", context)
@@ -79,4 +81,4 @@ def cadastro(request):
     context = {
         "blog": Blog.objects.first(),
     }
-    return(request, "cadastro.html", context)
+    return render(request, "cadastro.html", context)
