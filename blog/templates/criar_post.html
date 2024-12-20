@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static crispy_forms_tags %}
-{% block title %}Contato{% endblock title %}
+{% block title %}Criar post{% endblock title %}
 
 {% block header %}
 <!-- Page Header-->
@@ -9,8 +9,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Entre em contato</h1>
-                    <span class="subheading">Eu tenho todas as respostas</span>
+                    <h1>Crie um post</h1>
+                    <span class="subheading">Isso mesmo que voce leu</span>
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
                     <!-- To make this form functional, sign up at-->
                     <!-- https://startbootstrap.com/solution/contact-forms-->
                     <!-- to get an API token!-->
-                    <form id="contactForm" method="POST">
+                    <form id="contactForm" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% crispy form %}
+                        {{ form | crispy }}
 
                         <!-- Submit success message-->
                         <!---->
@@ -53,6 +53,7 @@
                         <!-- This is what your users will see when there is-->
                         <!-- an error submitting the form-->
                         <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Enviar</button>
                     </form>
                 </div>
             </div>
